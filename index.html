@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Header-znikanie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            height: 100vh;
+            background: url('img.jpeg') no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        main {
+            height: 130vh;
+            background-color: white;
+            color: black;
+            padding: 10px;
+        }
+
+        .scrolltop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffa037;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            border: 3px solid rgb(107, 70, 17);
+            border-radius: 50%;
+            transition: transform .3s;
+            transform: translateY(100px);
+
+        }
+
+        .scrolltop::after {
+            position: absolute;
+            content: "";
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-right: 5px solid white;
+            border-top: 5px solid white;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .scrolltop__show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <main></main>
+    <a href="#" class="scrolltop"></a>
+    <script>
+        const header = document.querySelector('header');
+        const btn = document.querySelector('.scrolltop');
+
+        window.addEventListener('scroll', function () {
+            let scrollPosition = window.scrollY;
+            let headerHeight = header.offsetHeight;
+
+            header.style.opacity = 1 - scrollPosition / headerHeight;
+
+            if (scrollPosition > headerHeight) {
+                btn.classList.add('scrolltop__show');
+            } else {
+                btn.classList.remove('scrolltop__show');
+            }
+        });
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault;
+            smoothScroll.scrollTop(800);
+        });
+    </script>
+    <script src="https://www.cssscript.com/demo/smooth-scroll-vanilla-javascript/js/smoothScroll.min.js"></script>
+</body>
+
+</html>
